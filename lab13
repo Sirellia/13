@@ -1,0 +1,27 @@
+import csv
+passengers_from_queenstown = 0
+min_age = float('inf')
+max_age = 0
+survived_from_queenstown = 0
+with open('titanic.csv', newline='') as csvfile:
+    reader = csv.DictReader(csvfile)
+
+    for row in reader:
+
+        if row['Embarked'] == 'Q':
+            passengers_from_queenstown += 1
+
+            try:
+                age = float(row['Age'])
+                if age < min_age:
+                    min_age = age
+                if age > max_age:
+                    max_age = age
+            except ValueError:
+                pass
+            if row['Survived'] == '1':
+                survived_from_queenstown += 1
+print(f"Количество пассажиров из порта Квинстауна: {passengers_from_queenstown}")
+print(f"Минимальный возраст: {min_age}")
+print(f"Максимальный возраст: {max_age}")
+print(f"Количество выживших из порта Квинстауна: {survived_from_queenstown}")
